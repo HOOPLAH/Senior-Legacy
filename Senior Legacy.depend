@@ -1,0 +1,117 @@
+# depslib dependency file v1.0
+1447035235 source:/home/lucas/Desktop/Programming/C++/Senior Legacy/src/Assets.cpp
+	"Assets.h"
+
+1447035221 /home/lucas/Desktop/Programming/C++/Senior Legacy/include/Assets.h
+	<map>
+	"SpriteInfo.h"
+
+1447035197 /home/lucas/Desktop/Programming/C++/Senior Legacy/include/SpriteInfo.h
+	<SFML/Graphics.hpp>
+
+1447048607 source:/home/lucas/Desktop/Programming/C++/Senior Legacy/main.cpp
+	<SFML/Graphics.hpp>
+	"Assets.h"
+	"World.h"
+
+1447056547 /home/lucas/Desktop/Programming/C++/Senior Legacy/include/Player.h
+	<SFML/Graphics.hpp>
+	"SpriteObject.h"
+	"ICollideable.h"
+
+1447130509 source:/home/lucas/Desktop/Programming/C++/Senior Legacy/src/Player.cpp
+	"Player.h"
+	<iostream>
+
+1447056219 /home/lucas/Desktop/Programming/C++/Senior Legacy/include/World.h
+	<memory>
+	<SFML/Graphics.hpp>
+	"ICollideable.h"
+	"Player.h"
+	"WorldObject.h"
+
+1447130394 source:/home/lucas/Desktop/Programming/C++/Senior Legacy/src/World.cpp
+	"World.h"
+	<iostream>
+	<fstream>
+	"Assets.h"
+
+1447044189 /home/lucas/Desktop/Programming/C++/Senior Legacy/include/SpriteObject.h
+	<SFML/Graphics.hpp>
+	"IRenderable.h"
+	"SpriteInfo.h"
+
+1447044153 /home/lucas/Desktop/Programming/C++/Senior Legacy/include/IRenderable.h
+	<SFML/Graphics/RenderTarget.hpp>
+
+1447045797 source:/home/lucas/Desktop/Programming/C++/Senior Legacy/src/SpriteObject.cpp
+	"SpriteObject.h"
+
+1447056884 /home/lucas/Desktop/Programming/C++/Senior Legacy/include/WorldObject.h
+	"SpriteObject.h"
+	"ICollideable.h"
+
+1447130490 source:/home/lucas/Desktop/Programming/C++/Senior Legacy/src/WorldObject.cpp
+	"WorldObject.h"
+
+1447130535 /home/lucas/Desktop/Programming/C++/Senior Legacy/include/ICollideable.h
+	<memory>
+
+1447048607 source:/home/lucas/Desktop/Programming/C++/Senior-Legacy/main.cpp
+	<SFML/Graphics.hpp>
+	"Assets.h"
+	"World.h"
+
+1447035221 /home/lucas/Desktop/Programming/C++/Senior-Legacy/include/Assets.h
+	<map>
+	"SpriteInfo.h"
+
+1447035197 /home/lucas/Desktop/Programming/C++/Senior-Legacy/include/SpriteInfo.h
+	<SFML/Graphics.hpp>
+
+1447056219 /home/lucas/Desktop/Programming/C++/Senior-Legacy/include/World.h
+	<memory>
+	<SFML/Graphics.hpp>
+	"ICollideable.h"
+	"Player.h"
+	"WorldObject.h"
+
+1447130535 /home/lucas/Desktop/Programming/C++/Senior-Legacy/include/ICollideable.h
+	<memory>
+
+1447056547 /home/lucas/Desktop/Programming/C++/Senior-Legacy/include/Player.h
+	<SFML/Graphics.hpp>
+	"SpriteObject.h"
+	"ICollideable.h"
+
+1447044189 /home/lucas/Desktop/Programming/C++/Senior-Legacy/include/SpriteObject.h
+	<SFML/Graphics.hpp>
+	"IRenderable.h"
+	"SpriteInfo.h"
+
+1447044153 /home/lucas/Desktop/Programming/C++/Senior-Legacy/include/IRenderable.h
+	<SFML/Graphics/RenderTarget.hpp>
+
+1447056884 /home/lucas/Desktop/Programming/C++/Senior-Legacy/include/WorldObject.h
+	"SpriteObject.h"
+	"ICollideable.h"
+
+1447035235 source:/home/lucas/Desktop/Programming/C++/Senior-Legacy/src/Assets.cpp
+	"Assets.h"
+
+1447130509 source:/home/lucas/Desktop/Programming/C++/Senior-Legacy/src/Player.cpp
+	"Player.h"
+	<iostream>
+
+1447045797 source:/home/lucas/Desktop/Programming/C++/Senior-Legacy/src/SpriteObject.cpp
+	"SpriteObject.h"
+
+1447130394 source:/home/lucas/Desktop/Programming/C++/Senior-Legacy/src/World.cpp
+	"World.h"
+	<iostream>
+	<fstream>
+	"Assets.h"
+
+1447130490 source:/home/lucas/Desktop/Programming/C++/Senior-Legacy/src/WorldObject.cpp
+	"WorldObject.h"
+
