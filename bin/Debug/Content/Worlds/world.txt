@@ -1,7 +1,7 @@
 
 ammocrate
-50
-50
+0
+300
 
 ammocrate
 150

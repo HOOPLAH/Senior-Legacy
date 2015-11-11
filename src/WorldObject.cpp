@@ -1,8 +1,8 @@
 #include "WorldObject.h"
 
-WorldObject::WorldObject(SpriteInfo& info, sf::Vector2f pos) :
+WorldObject::WorldObject(SpriteInfo& info, sf::Vector2f pos, bool _static) :
     SpriteObject(info, pos),
-    ICollideable(info.mHitBox, info.mFrameDim, pos)
+    ICollideable(info.mHitBox, info.mFrameDim, pos, _static)
 {
     //ctor
 }

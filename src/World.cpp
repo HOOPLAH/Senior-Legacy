@@ -10,6 +10,8 @@ World::World(std::string path)
     mPlayer = std::make_shared<Player>(Assets::sprites["ammocrate"], sf::Vector2f());
     mCollideables.push_back(mPlayer);
 
+    mGravity = sf::Vector2f(0.f, 10.f);
+
     loadWorld(path);
 }
 
@@ -21,9 +23,14 @@ World::~World()
 void World::update()
 {
     mPlayer->update();
+    mPlayer->setVelocity(mPlayer->getVelocity() + mGravity*(1/60.f));
 
     for (auto& obj : mWorldObjects)
+    {
         obj->update();
+        if (!obj->isStatic())
+            obj->setVelocity(obj->getVelocity() + mGravity*(1/60.f));
+    }
 
     // check collisions
     for (std::size_t x = 0; x < mCollideables.size(); x++)
@@ -77,7 +84,7 @@ void World::loadWorld(std::string path)
             float y = 0;
             file >> id >> x >> y;
 
-            auto newObj = std::make_shared<WorldObject>(Assets::sprites[id], sf::Vector2f(x, y));
+            auto newObj = std::make_shared<WorldObject>(Assets::sprites[id], sf::Vector2f(x, y), true);
             mWorldObjects.push_back(newObj);
             mCollideables.push_back(newObj);
         }

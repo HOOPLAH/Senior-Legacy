@@ -7,7 +7,7 @@
 class WorldObject : public SpriteObject, public ICollideable
 {
     public:
-        WorldObject(SpriteInfo& info, sf::Vector2f pos);
+        WorldObject(SpriteInfo& info, sf::Vector2f pos, bool _static = false);
         ~WorldObject();
 
         void update();

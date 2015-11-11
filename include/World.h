@@ -25,6 +25,8 @@ class World
     private:
         void loadWorld(std::string path);
 
+        sf::Vector2f mGravity;
+
         std::shared_ptr<Player> mPlayer;
         std::vector<std::shared_ptr<WorldObject>> mWorldObjects;
         std::vector<std::weak_ptr<ICollideable>> mCollideables;
