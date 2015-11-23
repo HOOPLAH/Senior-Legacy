@@ -30,6 +30,8 @@ class World
         std::shared_ptr<Player> mPlayer;
         std::vector<std::shared_ptr<WorldObject>> mWorldObjects;
         std::vector<std::weak_ptr<ICollideable>> mCollideables;
+
+        sf::Sprite mBackground;
 };
 
 #endif // WORLD_H

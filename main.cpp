@@ -1,7 +1,6 @@
 #include <SFML/Graphics.hpp>
 
 #include "Assets.h"
-#include "Constants.h"
 #include "World.h"
 
 int main()

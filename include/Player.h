@@ -19,7 +19,10 @@ class Player : public SpriteObject, public ICollideable
         void handleEvents(sf::Event& event);
 
     private:
+        int mRunSpeed;
+        int mJumpSpeed;
         bool mGrounded;
+        std::size_t mDirection;
 };
 
 #endif // PLAYER_H

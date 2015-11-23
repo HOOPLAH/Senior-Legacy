@@ -7,10 +7,12 @@
 
 World::World(std::string path)
 {
-    mPlayer = std::make_shared<Player>(Assets::sprites["ammocrate"], sf::Vector2f());
+    mPlayer = std::make_shared<Player>(Assets::sprites["bluepeewee"], sf::Vector2f());
     mCollideables.push_back(mPlayer);
 
     mGravity = sf::Vector2f(0.f, 10.f);
+
+    mBackground = sf::Sprite(Assets::sprites["background"].mTexture);
 
     loadWorld(path);
 }
@@ -28,8 +30,8 @@ void World::update()
     for (auto& obj : mWorldObjects)
     {
         obj->update();
-        if (!obj->isStatic())
-            obj->setVelocity(obj->getVelocity() + mGravity*(1/60.f));
+        //if (!obj->isStatic())
+            //obj->setVelocity(obj->getVelocity() + mGravity*(1/60.f));
     }
 
     // check collisions
@@ -50,14 +52,19 @@ void World::update()
             else if (mCollideables[x].lock()->isStatic())
                 _static = mCollideables[y];
 
-            if (checkCollision(dynamic, _static) && dynamic.lock()->isCollisionActive() && _static.lock()->isCollisionActive())
-                resolveCollision(dynamic, _static);
+            if (dynamic.lock() != _static.lock())
+            {
+                if (checkCollision(dynamic, _static) && dynamic.lock()->isCollisionActive() && _static.lock()->isCollisionActive())
+                    resolveCollision(dynamic, _static);
+            }
         }
     }
 }
 
 void World::draw(sf::RenderTarget& target)
 {
+    target.draw(mBackground);
+
     mPlayer->draw(target);
 
     for (auto& obj : mWorldObjects)

@@ -57,10 +57,9 @@
 1447130535 /home/lucas/Desktop/Programming/C++/Senior Legacy/include/ICollideable.h
 	<memory>
 
-1447225530 source:/home/lucas/Desktop/Programming/C++/Senior-Legacy/main.cpp
+1447229466 source:/home/lucas/Desktop/Programming/C++/Senior-Legacy/main.cpp
 	<SFML/Graphics.hpp>
 	"Assets.h"
-	"Constants.h"
 	"World.h"
 
 1447035221 /home/lucas/Desktop/Programming/C++/Senior-Legacy/include/Assets.h
@@ -70,7 +69,7 @@
 1447035197 /home/lucas/Desktop/Programming/C++/Senior-Legacy/include/SpriteInfo.h
 	<SFML/Graphics.hpp>
 
-1447215671 /home/lucas/Desktop/Programming/C++/Senior-Legacy/include/World.h
+1448251438 /home/lucas/Desktop/Programming/C++/Senior-Legacy/include/World.h
 	<memory>
 	<SFML/Graphics.hpp>
 	"ICollideable.h"
@@ -80,7 +79,7 @@
 1447130535 /home/lucas/Desktop/Programming/C++/Senior-Legacy/include/ICollideable.h
 	<memory>
 
-1447227007 /home/lucas/Desktop/Programming/C++/Senior-Legacy/include/Player.h
+1448242945 /home/lucas/Desktop/Programming/C++/Senior-Legacy/include/Player.h
 	<SFML/Graphics.hpp>
 	"SpriteObject.h"
 	"ICollideable.h"
@@ -97,24 +96,27 @@
 	"SpriteObject.h"
 	"ICollideable.h"
 
-1447035235 source:/home/lucas/Desktop/Programming/C++/Senior-Legacy/src/Assets.cpp
+1448257126 source:/home/lucas/Desktop/Programming/C++/Senior-Legacy/src/Assets.cpp
 	"Assets.h"
 
-1447227101 source:/home/lucas/Desktop/Programming/C++/Senior-Legacy/src/Player.cpp
+1448255978 source:/home/lucas/Desktop/Programming/C++/Senior-Legacy/src/Player.cpp
 	"Player.h"
+	"Direction.h"
 
-1447215734 source:/home/lucas/Desktop/Programming/C++/Senior-Legacy/src/SpriteObject.cpp
+1448242391 source:/home/lucas/Desktop/Programming/C++/Senior-Legacy/src/SpriteObject.cpp
 	"SpriteObject.h"
 
-1447216431 source:/home/lucas/Desktop/Programming/C++/Senior-Legacy/src/World.cpp
+1448257575 source:/home/lucas/Desktop/Programming/C++/Senior-Legacy/src/World.cpp
 	"World.h"
 	<iostream>
 	<fstream>
 	"Assets.h"
 
-1447215811 source:/home/lucas/Desktop/Programming/C++/Senior-Legacy/src/WorldObject.cpp
+1448246557 source:/home/lucas/Desktop/Programming/C++/Senior-Legacy/src/WorldObject.cpp
 	"WorldObject.h"
 
 1447027291 /home/lucas/Desktop/Programming/C++/Senior-Legacy/include/Constants.h
 	<SFML/System/Time.hpp>
+
+1436907090 /home/lucas/Desktop/Programming/C++/Senior-Legacy/include/Direction.h
 

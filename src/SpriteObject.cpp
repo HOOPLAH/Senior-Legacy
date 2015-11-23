@@ -33,10 +33,13 @@ void SpriteObject::draw(sf::RenderTarget& target)
     }
 
     // Calculate frame position
-    //int frameX = (mCurrentFrame%mSpriteInfo.mFramesPerRow)*mSpriteInfo.mFrameDim.x;
-    //int frameY = (mCurrentFrame/mSpriteInfo.mFramesPerRow)*mSpriteInfo.mFrameDim.y;
+    if (mSpriteInfo.mFramesPerRow > 1)
+    {
+        int frameX = (mCurrentFrame%mSpriteInfo.mFramesPerRow)*mSpriteInfo.mFrameDim.x;
+        int frameY = (mCurrentFrame/mSpriteInfo.mFramesPerRow)*mSpriteInfo.mFrameDim.y;
 
-    //mSprite.setTextureRect(sf::IntRect(frameX, frameY, mSpriteInfo.mFrameDim.x, mSpriteInfo.mFrameDim.y));
+        mSprite.setTextureRect(sf::IntRect(frameX, frameY, mSpriteInfo.mFrameDim.x, mSpriteInfo.mFrameDim.y));
+    }
 
     // Stop here
     //*****************************************************************************************
