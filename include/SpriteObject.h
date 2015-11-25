@@ -9,24 +9,28 @@
 class SpriteObject : public IRenderable
 {
     public:
-        SpriteObject(SpriteInfo& info, sf::Vector2f pos);
+        SpriteObject(SpriteInfo& info, sf::Vector2f pos, bool parallax=false);
         virtual ~SpriteObject();
 
         virtual void update();
-        virtual void draw(sf::RenderTarget& target);
+        virtual void draw(sf::RenderTarget& target, float alpha);
 
         // Mutator
-        virtual void setPosition(sf::Vector2f pos){mRenderPosition=pos;}
+        void setRenderPosition(sf::Vector2f pos){mRenderPosition=pos; mSprite.setPosition(pos);}
         void setFrameLoop(int start, int stop, bool loop=true);
+
         // Accessor
         SpriteInfo getSpriteInfo(){return mSpriteInfo;}
         sf::Sprite& getSprite(){return mSprite;}
         sf::Vector2f getRenderPosition(){return mRenderPosition;}
+        bool isParallaxable(){return mParallaxable;}
 
     protected:
         SpriteInfo& mSpriteInfo;
         sf::Sprite mSprite;
         sf::Vector2f mRenderPosition;
+
+        bool mParallaxable; // is this object meant to be parallaxed
 
         int mCurrentFrame;
         sf::Clock mAnimClock;

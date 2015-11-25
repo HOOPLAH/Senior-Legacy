@@ -6,8 +6,8 @@ Player::Player(SpriteInfo& info, sf::Vector2f pos) :
     SpriteObject(info, pos),
     ICollideable(info.mHitBox, info.mFrameDim, pos)
 {
-    mRunSpeed = 3.f;
-    mJumpSpeed = 6.f;
+    mRunSpeed = 2.f;
+    mJumpSpeed = 4.f;
     mGrounded = false;
     mDirection = Direction::STILL_LEFT;
 }
@@ -51,11 +51,11 @@ void Player::update()
     }
 }
 
-void Player::draw(sf::RenderTarget& target)
+void Player::draw(sf::RenderTarget& target, float alpha)
 {
-    SpriteObject::draw(target);
+    SpriteObject::draw(target, alpha);
 
-    mRenderPosition = mPhysicsPosition;
+    mRenderPosition = mPhysicsPosition*alpha + mOldPhysicsPosition*(1.f - alpha);
 }
 
 void Player::handleEvents(sf::Event& event)
@@ -97,7 +97,18 @@ void Player::handleEvents(sf::Event& event)
     }
 }
 
+void Player::respawn(sf::Vector2f pos)
+{
+    mOldPhysicsPosition = pos;
+    mPhysicsPosition = pos;
+    mRenderPosition = pos;
+    mVelocity = sf::Vector2f();
+    mAlive = true;
+}
+
 bool Player::onContactBegin(std::weak_ptr<ICollideable> object, bool fromLeft, bool fromTop)
 {
     mGrounded = true;
+
+    return true;
 }

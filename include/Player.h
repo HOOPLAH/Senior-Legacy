@@ -15,8 +15,10 @@ class Player : public SpriteObject, public ICollideable
         bool onContactBegin(std::weak_ptr<ICollideable> object, bool fromLeft, bool fromTop);
 
         void update();
-        void draw(sf::RenderTarget& target);
+        void draw(sf::RenderTarget& target, float alpha);
         void handleEvents(sf::Event& event);
+
+        void respawn(sf::Vector2f pos);
 
     private:
         int mRunSpeed;

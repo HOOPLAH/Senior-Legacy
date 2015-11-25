@@ -20,9 +20,9 @@ void WorldObject::update()
     mPhysicsPosition += mVelocity;
 }
 
-void WorldObject::draw(sf::RenderTarget& target)
+void WorldObject::draw(sf::RenderTarget& target, float alpha)
 {
-    SpriteObject::draw(target);
+    SpriteObject::draw(target, alpha);
 
-    mRenderPosition = mPhysicsPosition;
+    mRenderPosition = mPhysicsPosition*alpha + mOldPhysicsPosition*(1.f - alpha);
 }

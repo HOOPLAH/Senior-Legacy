@@ -9,6 +9,7 @@ void Assets::loadAssets()
     sprites["tilegrassblock"] = SpriteInfo("Content/Textures/grass_block_tileable.png");
     sprites["tallrock"] = SpriteInfo("Content/Textures/tall_rock.png");
     sprites["ladder"] = SpriteInfo("Content/Textures/ladder.png");
+    sprites["cloud"] = SpriteInfo("Content/Textures/cloud.png");
     sprites["background"] = SpriteInfo("Content/Textures/background.png");
 
     sprites["bluepeewee"] = SpriteInfo("Content/Textures/bluepeewee.png", 36, 6);

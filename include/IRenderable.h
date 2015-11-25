@@ -3,14 +3,16 @@
 
 #include <SFML/Graphics/RenderTarget.hpp>
 
-class IRenderable
+#include "IObject.h"
+
+class IRenderable : virtual public IObject
 {
     public:
         IRenderable(){}
         virtual ~IRenderable(){}
 
-        virtual void update() = 0;
-        virtual void draw(sf::RenderTarget& target) = 0;
+        virtual void draw(sf::RenderTarget& target, float alpha){}
+        virtual void drawStationary(sf::RenderTarget& target){}
 };
 
 #endif // IRENDERABLE_H

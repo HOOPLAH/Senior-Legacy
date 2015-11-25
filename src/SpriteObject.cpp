@@ -1,7 +1,8 @@
 #include "SpriteObject.h"
 
-SpriteObject::SpriteObject(SpriteInfo& info, sf::Vector2f pos) : IRenderable(),
+SpriteObject::SpriteObject(SpriteInfo& info, sf::Vector2f pos, bool parallax) : IRenderable(),
     mSpriteInfo(info),
+    mParallaxable(parallax),
     mCurrentFrame(0), mFrameDelay(100.f), mLoopAnim(true), mStartFrame(0), mEndFrame(0), mFrameDir(1)
 {
     mSprite = sf::Sprite(info.mTexture);
@@ -18,7 +19,7 @@ void SpriteObject::update()
     mSprite.setPosition(mRenderPosition);
 }
 
-void SpriteObject::draw(sf::RenderTarget& target)
+void SpriteObject::draw(sf::RenderTarget& target, float alpha)
 {
     if (mAnimClock.getElapsedTime().asMilliseconds() >= mFrameDelay &&
             (mLoopAnim || (mFrameDir == 1 && mCurrentFrame != mEndFrame) || (mFrameDir == -1 && mCurrentFrame != mStartFrame)))

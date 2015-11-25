@@ -1,6 +1,7 @@
 #include <SFML/Graphics.hpp>
 
 #include "Assets.h"
+#include "Constants.h"
 #include "World.h"
 
 int main()
@@ -11,21 +12,35 @@ int main()
 
     World world("Content/Worlds/world.txt");
 
+    sf::Clock clock;
+    sf::Time accumulator = sf::Time::Zero;
+    int ticks = 0;
     while (window.isOpen())
     {
-        sf::Event event;
-        while (window.pollEvent(event))
+        //update logic
+        sf::Time dt = clock.restart();
+        accumulator += dt;
+        while (accumulator > UPDATE_STEP)
         {
-            if (event.type == sf::Event::Closed)
-                window.close();
+            sf::Event event;
+            while (window.pollEvent(event))
+            {
+                if (event.type == sf::Event::Closed)
+                    window.close();
 
-            world.handleEvents(event);
+                    world.handleEvents(event);
+            }
+
+            world.update(ticks);
+            accumulator -= UPDATE_STEP;
+
+            ticks++;
         }
 
-        world.update();
+        float alpha = accumulator.asSeconds()/UPDATE_STEP.asSeconds();
 
         window.clear();
-        world.draw(window);
+        world.draw(window, alpha);
         window.display();
     }
 

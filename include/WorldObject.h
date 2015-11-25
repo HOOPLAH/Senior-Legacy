@@ -11,7 +11,7 @@ class WorldObject : public SpriteObject, public ICollideable
         ~WorldObject();
 
         void update();
-        void draw(sf::RenderTarget& target);
+        void draw(sf::RenderTarget& target, float alpha);
 
     private:
 };

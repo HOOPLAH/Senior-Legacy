@@ -3,7 +3,9 @@
 
 #include <memory>
 
-class ICollideable
+#include "IObject.h"
+
+class ICollideable : virtual public IObject
 {
     public:
         ICollideable(sf::FloatRect hitbox, sf::Vector2f dim, sf::Vector2f pos = sf::Vector2f(), bool _static = false)

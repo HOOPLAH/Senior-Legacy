@@ -1,9 +1,11 @@
 #include "World.h"
 
 #include <iostream>
+#include <sstream>
 #include <fstream>
 
 #include "Assets.h"
+#include "Constants.h"
 
 World::World(std::string path)
 {
@@ -11,6 +13,8 @@ World::World(std::string path)
     mCollideables.push_back(mPlayer);
 
     mGravity = sf::Vector2f(0.f, 10.f);
+    mSpawnPoint = sf::Vector2f(0.f,  0.f);
+    mBoundaries = sf::FloatRect(0.f,  0.f, 800.f, 600.f); // left, top, width, height
 
     mBackground = sf::Sprite(Assets::sprites["background"].mTexture);
 
@@ -22,16 +26,35 @@ World::~World()
     //dtor
 }
 
-void World::update()
+void World::update(int ticks)
 {
-    mPlayer->update();
-    mPlayer->setVelocity(mPlayer->getVelocity() + mGravity*(1/60.f));
+    removeDeadObjects(mRenderables);
+    removeDeadObjects(mCollideables);
 
-    for (auto& obj : mWorldObjects)
+    mPlayer->update();
+    if (!mPlayer->isAlive())
+    {
+        mPlayer->respawn(mSpawnPoint);
+        mCollideables.push_back(mPlayer);
+    }
+
+    for (auto& obj : mCollideables)
     {
         obj->update();
-        //if (!obj->isStatic())
-            //obj->setVelocity(obj->getVelocity() + mGravity*(1/60.f));
+        if (!obj->isStatic())
+            obj->setVelocity(obj->getVelocity() + mGravity*(UPDATE_STEP.asSeconds()));
+        if (obj->getPhysicsPosition().y > SCREEN_HEIGHT)
+            obj->kill();
+    }
+
+    for (auto& obj : mRenderables)
+    {
+        if (obj->isParallaxable())
+        {
+            obj->setRenderPosition(obj->getRenderPosition() + sf::Vector2f(0.25f, 0.f));
+            if (obj->getRenderPosition().x > SCREEN_WIDTH)
+                obj->setRenderPosition(sf::Vector2f(-obj->getSpriteInfo().mHitBox.width, obj->getRenderPosition().y));
+        }
     }
 
     // check collisions
@@ -42,33 +65,55 @@ void World::update()
             auto dynamic = mCollideables[x];
             auto _static = mCollideables[y];
 
-            if (!mCollideables[x].lock()->isStatic())
+            if (!mCollideables[x]->isStatic())
                 dynamic = mCollideables[x];
-            else if (!mCollideables[y].lock()->isStatic())
+            else if (!mCollideables[y]->isStatic())
                 dynamic = mCollideables[y];
 
-            if (mCollideables[x].lock()->isStatic())
+            if (mCollideables[x]->isStatic())
                 _static = mCollideables[x];
-            else if (mCollideables[x].lock()->isStatic())
+            else if (mCollideables[y]->isStatic())
                 _static = mCollideables[y];
 
-            if (dynamic.lock() != _static.lock())
+            if (dynamic != _static)
             {
-                if (checkCollision(dynamic, _static) && dynamic.lock()->isCollisionActive() && _static.lock()->isCollisionActive())
+                if (checkCollision(dynamic, _static) && dynamic->isCollisionActive() && _static->isCollisionActive())
                     resolveCollision(dynamic, _static);
             }
         }
     }
+
+    mCamera.follow(sf::Vector2f(mPlayer->getRenderPosition().x, SCREEN_HEIGHT/2.f));
 }
 
-void World::draw(sf::RenderTarget& target)
+void World::draw(sf::RenderTarget& target, float alpha)
 {
+    target.setView(target.getDefaultView());
+
     target.draw(mBackground);
 
-    mPlayer->draw(target);
+    for (auto& obj : mRenderables)
+    {
+        if (obj->isParallaxable())
+        {
+            obj->draw(target, alpha);
+        }
+    }
 
-    for (auto& obj : mWorldObjects)
-        obj->draw(target);
+    target.setView(mCamera.getView());
+
+    mPlayer->draw(target, alpha);
+
+    auto windowCoords = sf::FloatRect(mCamera.getCenter().x-(SCREEN_WIDTH/2),
+                                      mCamera.getCenter().y-(SCREEN_HEIGHT/2), SCREEN_WIDTH, SCREEN_HEIGHT);
+
+    for (auto& obj : mRenderables)
+    {
+        if (windowCoords.intersects(obj->getSprite().getGlobalBounds()) && !obj->isParallaxable())
+        {
+            obj->draw(target, alpha);
+        }
+    }
 }
 
 void World::handleEvents(sf::Event& event)
@@ -82,18 +127,75 @@ void World::loadWorld(std::string path)
     std::string line = "";
     std::ifstream file(path);
 
+    auto findKey = [](std::string key, std::string line) -> bool
+    {
+        std::size_t pos = 0;
+        pos = line.find(key);
+        if (pos != std::string::npos)
+            return true;
+
+        return false;
+    };
+
+    auto splitStringBySpaces = [](std::string line) -> std::vector<std::string>
+    {
+        std::istringstream iss(line);
+        std::vector<std::string> split_array;
+        while (iss)
+        {
+            std::string sub;
+            iss >> sub;
+            split_array.push_back(sub);
+        }
+
+        return split_array;
+    };
+
     if (file.is_open())
     {
         while (std::getline(file, line))
         {
-            std::string id = "";
-            float x = 0;
-            float y = 0;
-            file >> id >> x >> y;
+            auto split_line = splitStringBySpaces(line);
+            if (findKey("spawnpoint:", line))
+            {
+                float x = std::stof(split_line[1]);
+                float y = std::stof(split_line[2]);
 
-            auto newObj = std::make_shared<WorldObject>(Assets::sprites[id], sf::Vector2f(x, y), true);
-            mWorldObjects.push_back(newObj);
-            mCollideables.push_back(newObj);
+                mSpawnPoint = sf::Vector2f(x, y);
+                mPlayer->setPhysicsPosition(mSpawnPoint);
+            }
+            else if (findKey("boundaries:", line))
+            {
+                float x = std::stof(split_line[1]);
+                float y = std::stof(split_line[2]);
+                float width = std::stof(split_line[3]);
+                float height = std::stof(split_line[4]);
+
+                mBoundaries = sf::FloatRect(x, y, width, height);
+            }
+            else if (findKey("platform:", line))
+            {
+                std::string id = split_line[1];
+                float x = std::stof(split_line[2]);
+                float y = std::stof(split_line[3]);
+
+                auto platform = std::make_shared<WorldObject>(Assets::sprites[id], sf::Vector2f(x, y), true);
+                mRenderables.push_back(platform);
+                mCollideables.push_back(platform);
+            }
+            else if (findKey("renderonly:", line))
+            {
+                std::string id = split_line[1];
+                float x = std::stof(split_line[2]);
+                float y = std::stof(split_line[3]);
+                bool parallax = false;
+
+                if (split_line[4] == "parallax")
+                    parallax = true;
+
+                auto obj = std::make_shared<SpriteObject>(Assets::sprites[id], sf::Vector2f(x, y), parallax);
+                mRenderables.push_back(obj);
+            }
         }
     }
 }
@@ -194,5 +296,23 @@ void World::resolveCollision(std::weak_ptr<ICollideable> a, std::weak_ptr<IColli
 
         a.lock()->onContactEnd(b);
         b.lock()->onContactEnd(a);
+    }
+}
+
+template <class T>
+void World::removeDeadObjects(std::vector<T>& v)
+{
+    typename std::vector<T>::iterator it;
+
+    for (it = v.begin(); it != v.end();)
+    {
+        if(!(*it)->isAlive())
+        {
+            it = v.erase(it);
+        }
+        else
+        {
+            it++;
+        }
     }
 }
