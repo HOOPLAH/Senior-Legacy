@@ -108,7 +108,8 @@ void Player::respawn(sf::Vector2f pos)
 
 bool Player::onContactBegin(std::weak_ptr<ICollideable> object, bool fromLeft, bool fromTop)
 {
-    mGrounded = true;
+    if (object.lock()->isStatic())
+        mGrounded = true;
 
     return true;
 }

@@ -1,6 +1,5 @@
 #include "World.h"
 
-#include <iostream>
 #include <sstream>
 #include <fstream>
 
@@ -17,6 +16,7 @@ World::World(std::string path)
     mBoundaries = sf::FloatRect(0.f,  0.f, 800.f, 600.f); // left, top, width, height
 
     mBackground = sf::Sprite(Assets::sprites["background"].mTexture);
+    mBlackHole = std::make_shared<Blackhole>(Assets::sprites["blackhole"], sf::Vector2f(), 0);
 
     loadWorld(path);
 }
@@ -172,6 +172,18 @@ void World::loadWorld(std::string path)
                 float height = std::stof(split_line[4]);
 
                 mBoundaries = sf::FloatRect(x, y, width, height);
+            }
+            else if (findKey("blackhole:", line))
+            {
+                float x = std::stof(split_line[1]);
+                float y = std::stof(split_line[2]);
+                std::size_t nextWorld = std::stof(split_line[3]);
+
+                mBlackHole->setPhysicsPosition(sf::Vector2f(x, y));
+                mBlackHole->setRenderPosition(sf::Vector2f(x, y));
+                mBlackHole->setNextWorld(nextWorld);
+                mRenderables.push_back(mBlackHole);
+                mCollideables.push_back(mBlackHole);
             }
             else if (findKey("platform:", line))
             {

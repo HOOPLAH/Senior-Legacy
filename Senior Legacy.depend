@@ -57,11 +57,11 @@
 1447130535 /home/lucas/Desktop/Programming/C++/Senior Legacy/include/ICollideable.h
 	<memory>
 
-1448433024 source:/home/lucas/Desktop/Programming/C++/Senior-Legacy/main.cpp
+1448578546 source:/home/lucas/Desktop/Programming/C++/Senior-Legacy/main.cpp
 	<SFML/Graphics.hpp>
 	"Assets.h"
 	"Constants.h"
-	"World.h"
+	"WorldManager.h"
 
 1447035221 /home/lucas/Desktop/Programming/C++/Senior-Legacy/include/Assets.h
 	<map>
@@ -70,58 +70,60 @@
 1447035197 /home/lucas/Desktop/Programming/C++/Senior-Legacy/include/SpriteInfo.h
 	<SFML/Graphics.hpp>
 
-1448434821 /home/lucas/Desktop/Programming/C++/Senior-Legacy/include/World.h
+1448582020 /home/lucas/Desktop/Programming/C++/Senior-Legacy/include/World.h
 	<memory>
 	<SFML/Graphics.hpp>
+	"Blackhole.h"
 	"Camera.h"
 	"ICollideable.h"
 	"Player.h"
 	"WorldObject.h"
 
-1448432568 /home/lucas/Desktop/Programming/C++/Senior-Legacy/include/ICollideable.h
+1448573919 /home/lucas/Desktop/Programming/C++/Senior-Legacy/include/ICollideable.h
 	<memory>
+	<SFML/Graphics/Rect.hpp>
+	<SFML/System/Vector2.hpp>
 	"IObject.h"
 
-1448434567 /home/lucas/Desktop/Programming/C++/Senior-Legacy/include/Player.h
+1448573842 /home/lucas/Desktop/Programming/C++/Senior-Legacy/include/Player.h
 	<SFML/Graphics.hpp>
 	"SpriteObject.h"
 	"ICollideable.h"
 
-1448435709 /home/lucas/Desktop/Programming/C++/Senior-Legacy/include/SpriteObject.h
+1448569355 /home/lucas/Desktop/Programming/C++/Senior-Legacy/include/SpriteObject.h
 	<SFML/Graphics.hpp>
 	"IRenderable.h"
 	"SpriteInfo.h"
 
-1448432527 /home/lucas/Desktop/Programming/C++/Senior-Legacy/include/IRenderable.h
+1448573842 /home/lucas/Desktop/Programming/C++/Senior-Legacy/include/IRenderable.h
 	<SFML/Graphics/RenderTarget.hpp>
 	"IObject.h"
 
-1448432872 /home/lucas/Desktop/Programming/C++/Senior-Legacy/include/WorldObject.h
+1448573842 /home/lucas/Desktop/Programming/C++/Senior-Legacy/include/WorldObject.h
 	"SpriteObject.h"
 	"ICollideable.h"
 
-1448434428 source:/home/lucas/Desktop/Programming/C++/Senior-Legacy/src/Assets.cpp
+1448581114 source:/home/lucas/Desktop/Programming/C++/Senior-Legacy/src/Assets.cpp
 	"Assets.h"
 
-1448434798 source:/home/lucas/Desktop/Programming/C++/Senior-Legacy/src/Player.cpp
+1448581652 source:/home/lucas/Desktop/Programming/C++/Senior-Legacy/src/Player.cpp
 	"Player.h"
 	"Direction.h"
 
 1448435065 source:/home/lucas/Desktop/Programming/C++/Senior-Legacy/src/SpriteObject.cpp
 	"SpriteObject.h"
 
-1448436346 source:/home/lucas/Desktop/Programming/C++/Senior-Legacy/src/World.cpp
+1448582149 source:/home/lucas/Desktop/Programming/C++/Senior-Legacy/src/World.cpp
 	"World.h"
-	<iostream>
 	<sstream>
 	<fstream>
 	"Assets.h"
 	"Constants.h"
 
-1448433164 source:/home/lucas/Desktop/Programming/C++/Senior-Legacy/src/WorldObject.cpp
+1448573842 source:/home/lucas/Desktop/Programming/C++/Senior-Legacy/src/WorldObject.cpp
 	"WorldObject.h"
 
-1447027291 /home/lucas/Desktop/Programming/C++/Senior-Legacy/include/Constants.h
+1448573842 /home/lucas/Desktop/Programming/C++/Senior-Legacy/include/Constants.h
 	<SFML/System/Time.hpp>
 
 1436907090 /home/lucas/Desktop/Programming/C++/Senior-Legacy/include/Direction.h
@@ -135,4 +137,26 @@
 1448433688 source:/home/lucas/Desktop/Programming/C++/Senior-Legacy/src/Camera.cpp
 	"Camera.h"
 	"Constants.h"
+
+1448569198 source:/home/lucas/Desktop/Programming/C++/Senior-Legacy/src/ContactListener.cpp
+	"ContactListener.h"
+	"ICollideable.h"
+
+1437143400 /home/lucas/Desktop/Programming/C++/Senior-Legacy/include/ContactListener.h
+	<Box2D/Box2D.h>
+
+1448577038 /home/lucas/Desktop/Programming/C++/Senior-Legacy/include/WorldManager.h
+	<vector>
+	"World.h"
+
+1448582036 source:/home/lucas/Desktop/Programming/C++/Senior-Legacy/src/WorldManager.cpp
+	"WorldManager.h"
+	<fstream>
+
+1448581966 /home/lucas/Desktop/Programming/C++/Senior-Legacy/include/Blackhole.h
+	"SpriteObject.h"
+	"ICollideable.h"
+
+1448581951 source:/home/lucas/Desktop/Programming/C++/Senior-Legacy/src/Blackhole.cpp
+	"Blackhole.h"
 

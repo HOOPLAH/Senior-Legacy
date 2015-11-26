@@ -11,6 +11,7 @@ void Assets::loadAssets()
     sprites["ladder"] = SpriteInfo("Content/Textures/ladder.png");
     sprites["cloud"] = SpriteInfo("Content/Textures/cloud.png");
     sprites["background"] = SpriteInfo("Content/Textures/background.png");
+    sprites["blackhole"] = SpriteInfo("Content/Textures/blackhole.png");
 
     sprites["bluepeewee"] = SpriteInfo("Content/Textures/bluepeewee.png", 36, 6);
     sprites["bluepeewee"].mHitBox = sf::FloatRect(20.f, 10.f, 24.f, 44.f);

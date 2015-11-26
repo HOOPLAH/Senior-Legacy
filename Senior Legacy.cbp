@@ -41,20 +41,27 @@
 			<Add library="sfml-system" />
 		</Linker>
 		<Unit filename="include/Assets.h" />
+		<Unit filename="include/Blackhole.h" />
+		<Unit filename="include/Camera.h" />
 		<Unit filename="include/Constants.h" />
 		<Unit filename="include/Direction.h" />
 		<Unit filename="include/ICollideable.h" />
+		<Unit filename="include/IObject.h" />
 		<Unit filename="include/IRenderable.h" />
 		<Unit filename="include/Player.h" />
 		<Unit filename="include/SpriteInfo.h" />
 		<Unit filename="include/SpriteObject.h" />
 		<Unit filename="include/World.h" />
+		<Unit filename="include/WorldManager.h" />
 		<Unit filename="include/WorldObject.h" />
 		<Unit filename="main.cpp" />
 		<Unit filename="src/Assets.cpp" />
+		<Unit filename="src/Blackhole.cpp" />
+		<Unit filename="src/Camera.cpp" />
 		<Unit filename="src/Player.cpp" />
 		<Unit filename="src/SpriteObject.cpp" />
 		<Unit filename="src/World.cpp" />
+		<Unit filename="src/WorldManager.cpp" />
 		<Unit filename="src/WorldObject.cpp" />
 		<Extensions>
 			<code_completion />

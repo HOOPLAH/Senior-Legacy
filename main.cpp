@@ -2,7 +2,7 @@
 
 #include "Assets.h"
 #include "Constants.h"
-#include "World.h"
+#include "WorldManager.h"
 
 int main()
 {
@@ -10,7 +10,7 @@ int main()
 
     Assets::loadAssets();
 
-    World world("Content/Worlds/world.txt");
+    WorldManager worldMgr;
 
     sf::Clock clock;
     sf::Time accumulator = sf::Time::Zero;
@@ -28,10 +28,10 @@ int main()
                 if (event.type == sf::Event::Closed)
                     window.close();
 
-                    world.handleEvents(event);
+                    worldMgr.handleEvents(event);
             }
 
-            world.update(ticks);
+            worldMgr.update(ticks);
             accumulator -= UPDATE_STEP;
 
             ticks++;
@@ -40,7 +40,7 @@ int main()
         float alpha = accumulator.asSeconds()/UPDATE_STEP.asSeconds();
 
         window.clear();
-        world.draw(window, alpha);
+        worldMgr.draw(window, alpha);
         window.display();
     }
 

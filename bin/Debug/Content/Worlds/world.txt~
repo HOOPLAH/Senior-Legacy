@@ -1,6 +1,8 @@
 spawnpoint: 0 500
 
-renderonly: cloud 64 64 parallax
+blackhole: 787 400 0
+
+renderonly: cloud -64 64 parallax
 renderonly: cloud 320 10 parallax
 renderonly: cloud 128 128 parallax
 renderonly: cloud 512 96 parallax

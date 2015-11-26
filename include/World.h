@@ -5,6 +5,7 @@
 
 #include <SFML/Graphics.hpp>
 
+#include "Blackhole.h"
 #include "Camera.h"
 #include "ICollideable.h"
 #include "Player.h"
@@ -20,10 +21,11 @@ class World
         void draw(sf::RenderTarget& target, float alpha);
         void handleEvents(sf::Event& event);
 
-        bool checkCollision(std::weak_ptr<ICollideable> a, std::weak_ptr<ICollideable> b);
-        void resolveCollision(std::weak_ptr<ICollideable> a, std::weak_ptr<ICollideable> b);
+        std::weak_ptr<Blackhole> getBlackHole(){return mBlackHole;}
 
     private:
+        bool checkCollision(std::weak_ptr<ICollideable> a, std::weak_ptr<ICollideable> b);
+        void resolveCollision(std::weak_ptr<ICollideable> a, std::weak_ptr<ICollideable> b);
         void loadWorld(std::string path);
         template <class T>
         void removeDeadObjects(std::vector<T>& v);
@@ -37,6 +39,7 @@ class World
         std::vector<std::shared_ptr<ICollideable>> mCollideables;
 
         sf::Sprite mBackground;
+        std::shared_ptr<Blackhole> mBlackHole; // shared_ptr so it can be added to renderable and collideable
 
         Camera mCamera;
 };
